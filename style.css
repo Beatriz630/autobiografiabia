@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundinho de BIBI ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================= */
+        /* RESET GERAL & BASE (TEMA ROXO E FEMININO) */
+        /* ========================================= */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        } 
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #f3e8ff;
+            background: linear-gradient(135deg, #120521 0%, #2b1147 50%, #19092c 100%);
+            background-attachment: fixed;
+            cursor: default;
+            overflow-x: hidden;
+        }
+
+        /* ========================================= */
+        /* TELA DE ENTRADA (SPLASH SCREEN) */
+        /* ========================================= */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(179, 136, 235, 0.4), transparent 50%),
+                        linear-gradient(180deg, #130526 0%, #2a0b4e 50%, #180330 100%);
+            border-bottom: 5px solid #c77dff;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #splash-screen.oculto {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-content {
+            text-align: center;
+            padding: 30px;
+            max-width: 750px;
+        }
+
+        .splash-content h1 {
+            color: #ffffff;
+            font-size: clamp(24px, 4.5vw, 46px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px #e0aaff, 0 0 30px #c77dff, 0 0 45px #9d4edd;
+            margin-bottom: 25px;
+            animation: brilhoBibi 1.8s ease-in-out infinite alternate;
+        }
+
+        .splash-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .splash-img-box {
+            position: relative;
+            text-align: center;
+        }
+
+        .splash-img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #ff9ebb;
+            box-shadow: 0 0 20px rgba(199, 125, 255, 0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .splash-img:hover {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .splash-img-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ff9ebb;
+            margin-top: 6px;
+        }
+
+        #btn-entrar {
+            padding: 14px 34px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            background: linear-gradient(135deg, #9d4edd, #7209b7);
+            border: 2px solid #e0aaff;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        #btn-entrar:hover {
+            transform: scale(1.06);
+            background: linear-gradient(135deg, #ff9ebb, #9d4edd);
+            box-shadow: 0 0 35px rgba(255, 158, 187, 0.9);
+        }
+
+        @keyframes brilhoBibi {
+            from { text-shadow: 0 0 15px #e0aaff, 0 0 30px #c77dff; }
+            to { text-shadow: 0 0 25px #ff9ebb, 0 0 50px #e0aaff, 0 0 70px #9d4edd; }
+        }
+
+        /* ========================================= */
+        /* HEADER E NAVEGAÇÃO */
+        /* ========================================= */
+        header {
+            background-color: rgba(26, 9, 48, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(199, 125, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(114, 9, 183, 0.25);
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        header nav ul li a {
+            color: #e0aaff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ff9ebb;
+            transition: width 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #ff9ebb;
+            text-shadow: 0 0 8px rgba(255, 158, 187, 0.6);
+        }
+
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* ========================================= */
+        /* SEÇÕES GERAIS */
+        /* ========================================= */
+        section {
+            padding: 70px 20px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        section h1,
+        section h2 {
+            color: #c77dff;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            text-shadow: 0 0 18px rgba(199, 125, 255, 0.5);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #ebd9fc;
+        }
+
+        /* ========================================= */
+        /* SEÇÃO HABILIDADES - ESTILO QUADRINHOS (HQ) */
+        /* ========================================= */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 28px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #3c096c 0%, #240046 100%);
+            border: 3.5px solid #10051d;
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 6px 6px 0px #ff9ebb, 12px 12px 0px rgba(157, 78, 221, 0.6);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .skill-card:hover {
+            transform: translate(-5px, -5px) rotate(-1deg);
+            box-shadow: 10px 10px 0px #ff9ebb, 16px 16px 0px rgba(199, 125, 255, 0.8);
+            background: linear-gradient(135deg, #5a189a 0%, #3c096c 100%);
+        }
+
+        .skill-card::before {
+            content: "POW!";
+            position: absolute;
+            top: -12px;
+            right: -10px;
+            background: #ff9ebb;
+            color: #10051d;
+            font-family: 'Comic Neue', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+            padding: 3px 10px;
+            border: 2px solid #10051d;
+            border-radius: 12px;
+            box-shadow: 2px 2px 0px #10051d;
+            transform: rotate(12deg);
+        }
+
+        .skill-card h3 {
+            color: #ffffff;
+            font-family: 'Comic Neue', 'Poppins', sans-serif;
+            margin-bottom: 10px;
+            font-size: 1.45rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #10051d, 0 0 10px rgba(199, 125, 255, 0.7);
+        }
+
+        .skill-card p {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #f3e8ff;
+            margin-bottom: 0;
+            font-weight: 600;
+        }
+
+        /* ========================================= */
+        /* PROJETOS, CURRÍCULO E SONHOS */
+        /* ========================================= */
+        .card, .project-card, .curriculo-card {
+            background: linear-gradient(145deg, rgba(58, 25, 99, 0.65), rgba(30, 12, 54, 0.85));
+            border: 1.5px solid rgba(199, 125, 255, 0.4);
+            padding: 28px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover, .project-card:hover, .curriculo-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff9ebb;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.45);
+        }
+
+        .curriculo-item {
+            margin-bottom: 18px;
+        }
+
+        .curriculo-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .curriculo-item h3 {
+            color: #ff9ebb;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
+        }
+
+        /* ========================================= */
+        /* FOOTER */
+        /* ========================================= */
+        footer {
+            background-color: #10051d;
+            color: #e0aaff;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            border-top: 2px solid rgba(199, 125, 255, 0.3);
+        }
+
+        /* ========================================= */
+        /* FOTO DE PERFIL / HERO */
+        /* ========================================= */
+        #hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .foto-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .foto-perfil {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #c77dff;
+            box-shadow: 0 0 25px rgba(199, 125, 255, 0.8), 0 0 50px rgba(157, 78, 221, 0.5);
+            transition: all 0.5s ease;
+            animation: flutuar 4s ease-in-out infinite;
+        }
+
+        .foto-perfil:hover {
+            transform: scale(1.08);
+            border-color: #ff9ebb;
+            box-shadow: 0 0 35px rgba(255, 158, 187, 0.9), 0 0 70px rgba(199, 125, 255, 0.7);
+        }
+
+        @keyframes flutuar {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* ========================================= */
+        /* EFEITO LANTERNA (LUZ SEGUINDO O MOUSE) */
+        /* ========================================= */
+        .cursor-light {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                circle,
+                rgba(199, 125, 255, 0.28) 0%,
+                rgba(157, 78, 221, 0.12) 50%,
+                transparent 75%
+            );
+            z-index: 999999;
+            mix-blend-mode: screen;
+            transition: transform 0.05s ease-out;
+        }
+
+        @media (max-width: 600px) {
+            .splash-img {
+                width: 85px;
+                height: 85px;
+            }
+            header nav ul { gap: 15px; }
+            .foto-perfil { width: 160px; height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efeito de Luz no Cursor -->
+    <div class="cursor-light" id="cursor-light"></div>
+
+    <!-- Tela de Entrada (Splash Screen) -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h1>✨ BEM-VINDO AO MUNDINHO DE BIBI ✨</h1>
+            <div class="splash-images">
+                <div class="splash-img-box">
+                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=150&auto=format&fit=crop" alt="Ladybug" class="splash-img">
+                    <span class="splash-img-label">Ladybug 🐞</span>
+                </div>
+                <div class="splash-img-box">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=150&auto=format&fit=crop" alt="Cat Noir" class="splash-img">
+                    <span class="splash-img-label">Cat Noir 🐾</span>
+                </div>
+                <div class="splash-img-box">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop" alt="Princesa Tiana" class="splash-img">
+                    <span class="splash-img-label">Princesa Tiana 👑</span>
+                </div>
+            </div>
+            <button id="btn-entrar">Clique para Entrar ✨</button>
+        </div>
+    </div>
+
+    <!-- Áudio de Fundo -->
+    <audio id="musica-fundo" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Header e Navegação -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#curriculo">Currículo</a></li>
+                <li><a href="#sonhos">Sonhos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero / Foto de Perfil -->
+        <section id="hero">
+            <div class="foto-container">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop" alt="Foto de Perfil de Bibi" class="foto-perfil">
+            </div>
+        </section>
+
+        <!-- Seção Habilidades (Estilo HQ / Quadrinhos) -->
+        <section id="habilidades">
+            <h2>💥 Habilidades 💥</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <h3>Criatividade</h3>
+                    <p>Desenvolvimento de ideias únicas com foco em design e arte visual.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>HTML & CSS</h3>
+                    <p>Construção de páginas interativas, modernas e estilizadas.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Design Pop</h3>
+                    <p>Composição de layouts marcantes com estética geek e HQ.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Dedicação</h3>
+                    <p>Foco nos detalhes e na organização de cada projeto.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Projetos -->
+        <section id="projetos">
+            <h2>💜 Projetos 💜</h2>
+            <div class="project-card">
+                <h3>Portfólio Mundinho de Bibi</h3>
+                <p>Website interativo projetado em tons roxos com tela de entrada personalizada, áudio de fundo, iluminação de cursor e estilo quadrinhos nas habilidades.</p>
+            </div>
+        </section>
+
+        <!-- Seção Currículo -->
+        <section id="curriculo">
+            <h2>📜 Currículo 📜</h2>
+            <div class="curriculo-card">
+                <div class="curriculo-item">
+                    <h3>🎓 Formação</h3>
+                    <p>Estudos contínuos em desenvolvimento Web, estilização CSS avançada e Design de Interfaces.</p>
+                </div>
+                <div class="curriculo-item">
+                    <h3>💼 Habilidades Práticas</h3>
+                    <p>Criação de soluções visuais atraentes, estruturação de códigos e prototipagem.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sonhos -->
+        <section id="sonhos">
+            <h2>⭐ Sonhos ⭐</h2>
+            <div class="card">
+                <div class="curriculo-item">
+                    <h3>🌟 Inspiração & Conquistas</h3>
+                    <p>Transformar ideias em projetos incríveis e evoluir constantemente na tecnologia e na arte.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 - Mundinho de Bibi. Todos os direitos reservados. ✨</p>
+    </footer>
+
+    <!-- JavaScript Integrado -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnEntrar = document.getElementById('btn-entrar');
+            const splashScreen = document.getElementById('splash-screen');
+            const musica = document.getElementById('musica-fundo');
+            const cursorLight = document.getElementById('cursor-light');
+
+            // Clique no botão para fechar a tela de entrada e tocar a música
+            btnEntrar.addEventListener('click', () => {
+                splashScreen.classList.add('oculto');
+                
+                musica.volume = 0.4;
+                musica.play().catch(error => {
+                    console.log("Nota: Adicione um arquivo musica.mp3 válido para tocar o áudio.");
+                });
+            });
+
+            // Efeito de luz acompanhando o mouse
+            document.addEventListener('mousemove', (e) => {
+                cursorLight.style.left = e.clientX + 'px';
+                cursorLight.style.top = e.clientY + 'px';
+            });
+        });
+    </script>
+</body>
+</html>
